@@ -4,11 +4,19 @@ let taskTitle = document.getElementById("taskTitle")
 let taskPriority = document.getElementById("taskPriority")
 
 function postData(event) {
+
+    let title = taskTitle.value 
+    let priority = taskPriority.value
+    let task = { taskTitle: title, taskPriority: priority }
+
     fetch('http://localhost:3000/todolist', {
         method: "POST",
-        body: JSON.stringify({"taskTitle": `"${taskTitle.value}"`, "taskPriority": `"${taskPriority.value}"`})
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(task)
     }).then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => fetchData()) 
 }
 
 saveTaskButton.addEventListener('click', () => {
@@ -16,7 +24,8 @@ saveTaskButton.addEventListener('click', () => {
     postData()
 })
 
-fetch('http://localhost:3000/todolist')
+function fetchData() {
+    fetch('http://localhost:3000/todolist')
     .then(response => response.json())
     .then(json => json.forEach(element => {
         tasksDisplayList.append(`
@@ -25,4 +34,4 @@ fetch('http://localhost:3000/todolist')
         console.log(element.title)
         console.log(element.priority)
     }))
-
+}

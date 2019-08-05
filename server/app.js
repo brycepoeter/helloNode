@@ -19,7 +19,7 @@ app.post('/todolist', (req,res) => {
     tasks.push(task)
     console.log(taskTitle)
     console.log(taskPriority)
-    res.send("New task saved")
+    res.send({saved: true})
 })
 
 app.get('/todolist', (req,res) => {
