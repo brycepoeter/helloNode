@@ -1,0 +1,26 @@
+<html>
+
+<body>
+
+<h1>This is the current trips page</h1> 
+<a href='/add-trip'><h2> Click here to add a trip</h2> 
+
+{{#trips}}
+
+<form action="/delete-trip" method="POST"> 
+<img style="width: 200px" src={{imageUrl}}> 
+{{destination}} 
+{{departureDate}}
+{{returnDate}}
+<button>Delete Task</button> 
+<input type="hidden" name="tripName" value="{{destination}}"/> 
+</form> 
+
+
+{{/trips}}
+
+
+</body>
+
+
+</html>
